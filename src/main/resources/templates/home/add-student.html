@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Student</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+
+<div class="container">
+    <h3>Add Student</h3>
+    <hr>
+
+    <p>Add Student</p>
+
+    <form class="student-add">
+        <input type="text" id="name" placeholder="Name">
+        <input type="text" id="surname" placeholder="Surname">
+        <input type="text" id="average" placeholder="Average">
+        <button type="submit" >Save</button>
+    </form>
+
+    <div class="message"></div>
+
+    <hr>
+    <a th:href="@{/}">Back to Student list</a>
+</div>
+
+<script type="text/javascript" src="js/add-student.js"></script>
+</body>
+
+</html>
