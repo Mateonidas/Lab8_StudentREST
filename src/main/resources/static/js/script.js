@@ -1,4 +1,5 @@
 const studentFormDelete = document.querySelector(".student-delete");
+const studentFormUpdate = document.querySelector(".student-update");
 const message = document.querySelector(".message");
 
 message.textContent = "";
@@ -59,8 +60,44 @@ const handleSubmitDeleteStudent = async e => {
     deleteStudent();
 };
 
+function updateStudent() {
+    let updateId = document.getElementById('updateId').value;
+
+    fetch("http://localhost:8080/students/" + updateId, {
+        method: "GET",
+        headers: {"Content-type": "application/json; charset=UTF-8"}
+    })
+        .then(response => {
+            if(!response.ok) {
+                response.json().then(response => {
+                    if(response.code !== 200) {
+                        console.log(response);
+                        message.textContent = response.details;
+                        return Promise.reject(response.details);
+                    }});
+            }
+            else {
+                response.json().then( response => {
+                    // console.log(response)
+                    sessionStorage.setItem("updateId", updateId);
+                    sessionStorage.setItem("name", response.name);
+                    sessionStorage.setItem("surname", response.surname);
+                    sessionStorage.setItem("average", response.average);
+                    window.location.href = 'http://localhost:8080/updateStudent';
+                })
+            }
+        })
+}
+
+const handleSubmitUpdateStudent = async e => {
+    e.preventDefault();
+    updateStudent();
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     getAllStudents();
 });
 
 studentFormDelete.addEventListener("submit", e => handleSubmitDeleteStudent(e));
+
+studentFormUpdate.addEventListener("submit", e => handleSubmitUpdateStudent(e));

@@ -9,7 +9,7 @@ function addStudent(){
     st.surname=document.getElementById('surname').value;
     st.average=document.getElementById('average').value;
     fetch("http://localhost:8080/students", {
-        method: "post",
+        method: "POST",
         body: JSON.stringify(st),
         headers: {"Content-type": "application/json; charset=UTF-8"}
     })

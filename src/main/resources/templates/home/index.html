@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title> Front end do REST API </title>
+    <title> Lab8_StudentREST </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -12,15 +12,23 @@
 
     <a th:href="@{/addStudent}">Add Student</a>
 
+    <form class="student-update">
+        <label for="id">Enter student ID to update</label>
+        <input type="text" id="updateId" placeholder="ID">
+        <button type="submit" >Update</button>
+    </form>
+
     <form class="student-delete">
         <label for="id">Enter student ID to delete</label>
         <input type="text" id="id" placeholder="ID">
         <button type="submit" >Delete</button>
     </form>
 
-    <div class="message"></div>
+
 
     <div id="main"> </div>
+
+    <div class="message" style="color: red"></div>
 </div>
 <script type="text/javascript" src="js/script.js"></script>
 </body>

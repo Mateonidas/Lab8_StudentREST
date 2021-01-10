@@ -8,7 +8,9 @@ import java.util.List;
 @Service
 public interface StudentService {
 
-    public List<StudentEntity> getStudentList();
+    List<StudentEntity> getStudentList();
+
+    StudentEntity getStudent(int studentId);
 
     void addStudent(StudentEntity studentEntity);
 

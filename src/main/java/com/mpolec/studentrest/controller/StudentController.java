@@ -22,4 +22,9 @@ public class StudentController {
     public String addStudent(){
         return "home/add-student";
     }
+
+    @GetMapping("/updateStudent")
+    public String updateStudent(){
+        return "home/update-student";
+    }
 }

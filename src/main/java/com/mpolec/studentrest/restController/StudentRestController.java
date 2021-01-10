@@ -18,6 +18,11 @@ public class StudentRestController {
         return studentService.getStudentList();
     }
 
+    @GetMapping("/students/{studentId}")
+    public StudentEntity getStudent(@PathVariable int studentId) {
+        return studentService.getStudent(studentId);
+    }
+
     @PostMapping("/students")
     public void addStudent(@RequestBody StudentEntity studentEntity){
         studentService.addStudent(studentEntity);

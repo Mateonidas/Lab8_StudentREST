@@ -25,6 +25,21 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public StudentEntity getStudent(int studentId) {
+        responseDetails = new ArrayList<>();
+
+        return studentRepository.findById(studentId)
+                .orElseThrow(() -> {
+                    responseDetails.add("Not found student with id - " + studentId);
+                    return new ResponseDetailsStatusException(
+                            HttpStatus.NOT_FOUND,
+                            "Failure",
+                            responseDetails
+                    );
+                });
+    }
+
+    @Override
     public void addStudent(StudentEntity studentEntity) {
         studentRepository.save(studentEntity);
     }
