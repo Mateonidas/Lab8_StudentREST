@@ -4,18 +4,23 @@ const message = document.querySelector(".message");
 
 message.textContent = "";
 
-function getAllStudents(){
+function getAllStudents() {
     fetch("http://localhost:8080/students")
         .then((response) => {
             if (response.status !== 200) {
-                return Promise.reject('Something go wrong'); }
+                return Promise.reject('Something go wrong');
+            }
             return response.json();
         })
-        .then( (data) => { showTable(data); } )
-        .catch( (error) => { console.log(error); } );
+        .then((data) => {
+            showTable(data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 }
 
-function showTable(response){
+function showTable(response) {
     const main = document.getElementById('main');
     let content = "<table border='1'> <thead> <tr> <th> Id</th><th> Imię</th>" +
         "<th>Nazwisko</th><th>Średnia</th></tr></thead><tbody>";
@@ -31,28 +36,31 @@ function showTable(response){
     main.innerHTML = content;
 }
 
-function  deleteStudent() {
+function deleteStudent() {
 
     message.textContent = "";
 
     let id = document.getElementById('id').value;
-    fetch("http://localhost:8080/students/" + id, {
-        method: "DELETE",
-        headers: {"Content-type": "application/json; charset=UTF-8"}
-    })
-        .then(response => {
-            if(!response.ok) {
-                response.json().then(response => {
-                    if(response.code !== 200) {
-                        console.log(response);
-                        message.textContent = response.details;
-                        return Promise.reject(response.details);
-                    }});
-            }
-            else {
-                location.reload();
-            }
+
+    if (id === "") {
+        message.textContent = "Id cannot be null."
+    } else {
+        fetch("http://localhost:8080/students/" + id, {
+            method: "DELETE",
+            headers: {"Content-type": "application/json; charset=UTF-8"}
         })
+            .then(response => {
+                if (!response.ok) {
+                    response.json().then(response => {
+                            console.log(response);
+                            message.textContent = response.details;
+                            return Promise.reject(response.details);
+                    });
+                } else {
+                    location.reload();
+                }
+            });
+    }
 }
 
 const handleSubmitDeleteStudent = async e => {
@@ -63,30 +71,31 @@ const handleSubmitDeleteStudent = async e => {
 function updateStudent() {
     let updateId = document.getElementById('updateId').value;
 
-    fetch("http://localhost:8080/students/" + updateId, {
-        method: "GET",
-        headers: {"Content-type": "application/json; charset=UTF-8"}
-    })
-        .then(response => {
-            if(!response.ok) {
-                response.json().then(response => {
-                    if(response.code !== 200) {
-                        console.log(response);
-                        message.textContent = response.details;
-                        return Promise.reject(response.details);
-                    }});
-            }
-            else {
-                response.json().then( response => {
-                    // console.log(response)
-                    sessionStorage.setItem("updateId", updateId);
-                    sessionStorage.setItem("name", response.name);
-                    sessionStorage.setItem("surname", response.surname);
-                    sessionStorage.setItem("average", response.average);
-                    window.location.href = 'http://localhost:8080/updateStudent';
-                })
-            }
+    if (updateId === "") {
+        message.textContent = "Id cannot be null."
+    } else {
+        fetch("http://localhost:8080/students/" + updateId, {
+            method: "GET",
+            headers: {"Content-type": "application/json; charset=UTF-8"}
         })
+            .then(response => {
+                if (!response.ok) {
+                    response.json().then(response => {
+                            console.log(response);
+                            message.textContent = response.details;
+                            return Promise.reject(response.details);
+                    });
+                } else {
+                    response.json().then(response => {
+                        sessionStorage.setItem("updateId", updateId);
+                        sessionStorage.setItem("name", response.name);
+                        sessionStorage.setItem("surname", response.surname);
+                        sessionStorage.setItem("average", response.average);
+                        window.location.href = 'http://localhost:8080/updateStudent';
+                    })
+                }
+            });
+    }
 }
 
 const handleSubmitUpdateStudent = async e => {
