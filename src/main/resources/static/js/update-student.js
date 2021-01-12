@@ -38,7 +38,7 @@ function updateStudent(){
         });
 }
 
-const handleSubmitUpdateStudent = async e => {
+const handleSubmitUpdateStudent = e => {
     e.preventDefault();
     updateStudent();
 };

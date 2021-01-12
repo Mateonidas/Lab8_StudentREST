@@ -63,7 +63,7 @@ function deleteStudent() {
     }
 }
 
-const handleSubmitDeleteStudent = async e => {
+const handleSubmitDeleteStudent = e => {
     e.preventDefault();
     deleteStudent();
 };
@@ -98,7 +98,7 @@ function updateStudent() {
     }
 }
 
-const handleSubmitUpdateStudent = async e => {
+const handleSubmitUpdateStudent = e => {
     e.preventDefault();
     updateStudent();
 };

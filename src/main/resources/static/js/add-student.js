@@ -26,7 +26,7 @@ function addStudent(){
         });
 }
 
-const handleSubmitAddStudent = async e => {
+const handleSubmitAddStudent = e => {
     e.preventDefault();
     addStudent();
 };
